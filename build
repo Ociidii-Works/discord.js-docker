@@ -1,0 +1,36 @@
+#!/bin/bash
+
+printUsage() {
+  echo ""
+  echo "  -h : Displays Help menu"
+  echo "  -i : Recreates containers completely."
+  echo "  -s : Enters server container instance"
+}
+SERVER_NAME="discord_server"
+DB_NAME="discord_database"
+
+while getopts idslh o; do
+  case $o in
+    i)
+        echo "Rebuilding container"
+        docker-compose down
+        docker-compose build
+        docker-compose up
+        exit 0
+        ;;
+    s)
+      echo "initializing Server bash shell - $SERVER_NAME"
+      sudo docker exec -it $SERVER_NAME /bin/bash
+      exit 0
+      ;;
+    h|\?)
+      printUsage
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+echo "Restarting containers"
+docker-compose down
+docker-compose up

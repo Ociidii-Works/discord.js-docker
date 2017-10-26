@@ -1,0 +1,27 @@
+version: '2'
+services:
+    server:
+      container_name: discord_server
+      build:
+        context: .
+        dockerfile: ./Dockerfile
+      ports:
+        - 8060:8080
+      volumes:
+        - ./:/usr/src/app
+      restart: always
+      depends_on:
+        - database
+      environment:
+        NODE_ENV: "development"
+        PORT: 8080
+      entrypoint: ["npm", "run", "debug"]
+    database:
+      container_name: discord_database
+      image: mongo:3.4.2
+      restart: always
+      volumes:
+        - ../opt/mongodb:/data/db
+      ports:
+        - 27020:27017
+      command: mongod --auth
