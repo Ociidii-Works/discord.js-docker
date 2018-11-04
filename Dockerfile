@@ -7,7 +7,7 @@ RUN apt-get install debdelta -y && \
     debdelta-upgrade
 RUN apt-get install -y curl git git-core && \
     apt-get install -y build-essential ffmpeg nodejs python 
-RUN sudo apt-get install -y nodejs
+RUN apt-get install -y nodejs
 RUN apt-get autoremove -y
 
 # Create app directory
