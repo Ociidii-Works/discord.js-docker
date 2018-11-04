@@ -5,7 +5,7 @@ MAINTAINER Mindaugas K. <kasp.mindaugas@gmail.com>
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl git git-core && \
-    curl -sL https://deb.nodesource.com/setup_7.x | bash && \
+    curl -sL https://deb.nodesource.com/setup_10.x | bash && \
     apt-get update && \
     apt-get install -y build-essential ffmpeg nodejs python && \
     apt-get autoremove -y
